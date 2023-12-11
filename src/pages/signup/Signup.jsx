@@ -51,7 +51,7 @@ const Signup = () => {
         if (token) {
             navigate("/");
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
 
 
     return (
