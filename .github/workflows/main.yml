@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Node.js Docker Deployment
 
 on:
   push:
@@ -6,26 +6,32 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      - name: Install dependencies and build
-        run: |
-          npm ci
-          npm run build
+      - name: Install dependencies
+        run: npm install
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build # Change this to your build directory
+      - name: Build application
+        run: npm run build
+
+      - name: Build Docker image
+        run: |
+          docker build -t philip07/reactapp:${{ 1.0 }} .
+          docker login -u philip07 -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push philip07/reactapp:${{ github.sha }}
+
+      - name: Deploy to server
+        run: |
+          ssh user@your-server 'docker pull philip07/reactapp:${{ 1.0 }}'
+          ssh user@your-server 'docker run -d -p 80:80 philip07/reactapp:${{ 1.0 }}'
 
