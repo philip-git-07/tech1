@@ -25,7 +25,7 @@ const blogReducer = (state = { blogs: null }, action) => {
 
         case DEL_BLOG:
             const delArray = state.blogs.filter((obj) => {
-                return obj._id != action.payload;
+                return obj._id !== action.payload;
             });
             return {
                 ...state,
@@ -35,7 +35,7 @@ const blogReducer = (state = { blogs: null }, action) => {
 
         case UPDATE_NEW_BLOG:
             const newBlogArray = state.blogs.map((obj) => {
-                if (obj._id == action.payload._id) {
+                if (obj._id === action.payload._id) {
                     return action.payload;
                 }
                 return obj;
