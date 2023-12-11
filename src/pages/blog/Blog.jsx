@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./blog.scss"
 import NavBar from '../../components/navbar/NavBar'
-import img from "../../assests/img1.png"
+// import img from "../../assests/img1.png"
 import BlogCard from '../../components/blogCard/BlogCard'
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
@@ -27,7 +27,7 @@ const Blog = () => {
 
     useEffect(() => {
         dispatch(getBlogs());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (blogs) {
