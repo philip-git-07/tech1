@@ -40,3 +40,4 @@ jobs:
       - name: Deploy
         run: |
           serve -s build
+          serve -s build -l 4000
