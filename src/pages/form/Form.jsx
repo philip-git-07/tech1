@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./form.scss"
 import NavBar from '../../components/navbar/NavBar'
 import { Button } from '@mui/material'
-import img from "../../assests/img2.png"
+// import img from "../../assests/img2.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { addBlog, deleteBlog, getBlogs, updateBlog } from '../../actions/blogAction'
@@ -25,7 +25,7 @@ const Form = () => {
         if (!token) {
             navigate("/login");
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
 
 
     //////////////////---------- ADD blog ----//////////////////////////////
@@ -41,7 +41,7 @@ const Form = () => {
         if (user) {
             setBlog({ ...blog, "user_id": user._id });
         }
-    }, [user]);
+    }, [user, blog]);
 
     const handleChange = (e) => {
         setBlog({ ...blog, [e.target.name]: e.target.value });
@@ -66,7 +66,7 @@ const Form = () => {
 
     useEffect(() => {
         dispatch(getBlogs());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (blogs) {
