@@ -50,7 +50,7 @@ const Login = () => {
         if (token) {
             navigate("/");
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
 
 
 
